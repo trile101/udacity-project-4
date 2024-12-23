@@ -2,7 +2,8 @@ name: Backend Continuous Integration
 
 on:
   pull_request:
-    branch: main
+    branches:
+      - main
 
 jobs:
   linting-job:
@@ -29,7 +30,7 @@ jobs:
       - run: cd starter/backend && pipenv install 
 
       # Testing
-      - run: cd starter/backend && pipenv test
+      - run: cd starter/backend && pipenv run test
   
   build:
     needs: [linting-job, testing-job]
@@ -42,7 +43,5 @@ jobs:
     - run: cd starter/backend && pipenv install
 
     # Build
-    - run: |
-      cd starter/backend
-      docker build -t backend-img .
+    - run: cd starter/backend && docker build -t backend-img .
   
