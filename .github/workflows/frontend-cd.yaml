@@ -1,0 +1,48 @@
+name: Frontend Continuous Deployment
+
+on:
+  merge:
+    branch:
+      main
+  workflow_dispatch:
+
+jobs: 
+  lint-job:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      
+      - run: cd starter/frontend && npm ci
+
+      - run: cd starter/frontend && npm run lint
+      
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
+      
+      - run: cd starter/frontend && npm ci
+
+      - run: cd starter/frontend && npm test
+  
+  build:
+    needs: [lint-job, test-job]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
+      
+      - run: cd starter/frontend && npm ci
+
+      - run: cd starter/frontend && npm test
