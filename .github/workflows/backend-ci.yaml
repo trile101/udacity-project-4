@@ -17,6 +17,8 @@ jobs:
       - run: pip install pipenv
       - run: cd starter/backend && pipenv install 
 
+      - run: echo $PWD
+      
       # Linting
       - run: pipenv run lint starter/backend/movies/
   
