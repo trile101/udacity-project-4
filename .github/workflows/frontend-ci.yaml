@@ -1,4 +1,4 @@
-name: CI Pipeline Frontend
+name: Frontend Continuous Integration
 
 on:
   push:
@@ -41,6 +41,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - run: |
-          cd starter/frontend
-          docker build -t fe-image .
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
+      
+      - run: cd starter/frontend && npm ci
+
+      - run: cd starter/frontend && npm test

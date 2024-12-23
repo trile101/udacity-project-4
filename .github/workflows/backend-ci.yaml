@@ -1,0 +1,48 @@
+name: Backend Continuous Integration
+
+on:
+  pull_request:
+    branch: main
+
+jobs:
+  linting-job:
+    runs_on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+
+      # Install dependencies
+      - run: pip install pipenv
+      - run: cd starter/backend && pipenv install 
+
+      # Listing
+      - run: cd starter/backend && pipenv run lint movies/*
+  
+  testing-job:
+    runs_on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+
+      # Install dependencies
+      - run: pip install pipenv
+      - run: cd starter/backend && pipenv install 
+
+      # Testing
+      - run: cd starter/backend && pipenv test
+  
+  build:
+    needs: [linting-job, testing-job]
+    runs_on: ubuntu-latest
+
+    - uses: actions/setup-python@v3
+
+    # Install dependencies
+    - run: pip install pipenv
+    - run: cd starter/backend && pipenv install
+
+    # Build
+    - run: |
+      cd starter/backend
+      docker build -t backend-img .
+  
