@@ -18,9 +18,9 @@ jobs:
       - run: cd starter/backend && pipenv install 
 
       - run: echo $PWD
-      
+
       # Linting
-      - run: pipenv run lint starter/backend/movies/
+      - run: pipenv run lint ./starter/backend/movies/
   
   testing-job:
     runs-on: ubuntu-latest
