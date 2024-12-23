@@ -16,7 +16,7 @@ jobs:
       - run: pip install pipenv
       - run: cd starter/backend && pipenv install 
 
-      # Listing
+      # Linting
       - run: cd starter/backend && pipenv run lint movies/*
   
   testing-job:
@@ -35,13 +35,13 @@ jobs:
   build:
     needs: [linting-job, testing-job]
     runs_on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
 
-    - uses: actions/setup-python@v3
+      # Install dependencies
+      - run: pip install pipenv
+      - run: cd starter/backend && pipenv install
 
-    # Install dependencies
-    - run: pip install pipenv
-    - run: cd starter/backend && pipenv install
-
-    # Build
-    - run: cd starter/backend && docker build -t backend-img .
-  
+      # Build
+      - run: cd starter/backend && docker build -t backend-img .
