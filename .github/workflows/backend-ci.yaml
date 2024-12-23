@@ -18,7 +18,7 @@ jobs:
       - run: cd starter/backend && pipenv install 
 
       # Linting
-      - run: cd starter/backend && pipenv run lint movies/
+      - run: pipenv run lint starter/backend/movies/
   
   testing-job:
     runs-on: ubuntu-latest
