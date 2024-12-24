@@ -4,6 +4,8 @@ on:
   push:
     branch:
       main
+  workflow_dispatch:
+
 env:
   CLUSTER_NAME: my-cluster
 
