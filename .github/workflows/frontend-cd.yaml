@@ -5,6 +5,10 @@ on:
     branch:
       main
   workflow_dispatch:
+  
+permissions:
+  id-token: write
+  contents: read
 
 env:
   REACT_APP_MOVIE_API_URL: http://localhost:5000
