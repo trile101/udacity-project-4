@@ -5,7 +5,7 @@ on:
     branch:
       main
   workflow_dispatch:
-  
+
 permissions:
   id-token: write
   contents: read
@@ -44,6 +44,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Set up AWS credentials
+        run: |
+          echo "[default]" > ~/.aws/credentials
+          echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
