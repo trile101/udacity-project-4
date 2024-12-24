@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  linting-job:
+  lint-job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,7 +20,7 @@ jobs:
       # Linting
       - run: cd starter/backend && pip install flake8 && pipenv run lint
   
-  testing-job:
+  test-job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -34,7 +34,7 @@ jobs:
       - run: cd starter/backend && pipenv run test
   
   build:
-    needs: [linting-job, testing-job]
+    needs: [lint-job, test-job]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

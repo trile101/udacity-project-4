@@ -10,27 +10,29 @@ env:
 jobs:
   lint-job:
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      
-      - run: cd starter/backend && npm ci
-      - run: cd starter/backend && npm run lint
-      
+      # Install dependencies
+      - run: pip install pipenv
+      - run: cd starter/backend && pipenv install 
+
+      # Linting
+      - run: cd starter/backend && pip install flake8 && pipenv run lint
+  
   test-job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: latest
-      
-      - run: cd starter/backend && npm ci
-      - run: cd starter/backend && npm test
+      # Install dependencies
+      - run: pip install pipenv
+      - run: cd starter/backend && pipenv install
+
+      # Testing
+      - run: cd starter/backend && pipenv run test
 
   push-job:
     needs: [lint-job, test-job]
