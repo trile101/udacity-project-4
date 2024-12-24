@@ -12,7 +12,7 @@ permissions:
 
 env:
   REACT_APP_MOVIE_API_URL: http://localhost:5000
-  CLUSTER_NAME: my_cluster
+  CLUSTER_NAME: my-cluster
 
 
 jobs: 
