@@ -34,8 +34,8 @@ jobs:
       
       - run: cd starter/frontend && npm ci
       - run: cd starter/frontend && npm test
-  
-  push-image:
+    
+  push-job:
     needs: [lint-job, test-job]
     runs-on: ubuntu-latest
     steps:
