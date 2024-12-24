@@ -19,7 +19,6 @@ jobs:
           node-version: 16
       
       - run: cd starter/frontend && npm ci
-
       - run: cd starter/frontend && npm run lint
       
   test-job:
@@ -32,7 +31,6 @@ jobs:
           node-version: latest
       
       - run: cd starter/frontend && npm ci
-
       - run: cd starter/frontend && npm test
   
   build:

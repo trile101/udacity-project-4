@@ -90,9 +90,9 @@ jobs:
           aws-region: us-east-1
 
         
-      # - name: Update kubeconfig for EKS
-      #   run: |
-      #     aws eks update-kubeconfig --region us-east-1 --name ${{env.CLUSTER_NAME}}
+      - name: Update kubeconfig for EKS
+        run: |
+          aws eks update-kubeconfig --region us-east-1 --name ${{env.CLUSTER_NAME}}
 
       - name: Install kustomize
         run: |
@@ -105,3 +105,4 @@ jobs:
         run: |
           cd starter/frontend/k8s
           kustomize edit set image frontend=$DOCKER_IMAGE
+          kustomize build | kubectl apply -f -
