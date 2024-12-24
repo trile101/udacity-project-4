@@ -101,7 +101,7 @@ jobs:
 
       - name: Update image with kustomize
         env:
-          DOCKER_IMAGE: ${{push-job.outputs.DOCKER_IMAGE}}
+          DOCKER_IMAGE: ${{needs.push-job.outputs.DOCKER_IMAGE}}
         run: |
           cd starter/frontend/k8s
           kustomize edit set image frontend=$DOCKER_IMAGE
