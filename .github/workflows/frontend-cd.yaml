@@ -42,6 +42,7 @@ jobs:
   push-job:
     needs: [lint-job, test-job]
     runs-on: ubuntu-latest
+    environment: uda-dev
     steps:
       - uses: actions/checkout@v3
 
